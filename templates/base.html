@@ -1,20 +1,26 @@
 <!doctype html>
 <html>
     <head>
-        <title>{{title}}</title>
         <style>
-            .error {color: red;}
-            h1{text-align: center}
+            span.navigationSpace {
+            padding-left: 30px;
+        }
         </style>
-    </head>
-<body>
-    <nav>
-        <a href="/blog">Main Blog Page</a> |
-        <a href="/newpost">Add a Blog Entry</a> 
+
+        <nav>
+            <a href="/blog">Main Blog Page</a>
+            <span class="navigationSpace"></span>
+            <a href="/newpost">Add a Blog Entry</a>
         </nav>
         
-    {% block content %}
-    {% endblock %}
+        <title>{{title}}</title>
+    </head>
+<body>
+
+{% block content %}
+
+   
+{% endblock %}
 
 </body>
 </html>
