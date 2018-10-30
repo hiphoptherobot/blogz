@@ -1,37 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<style>
+    div.a { text-align: center;}
+    .error { color: red;}
+</style> 
+
+<div class="a"> 
     <h1>Add a Blog Entry</h1>
-    <form method='post'>
-        <table>
-        <tr>
-        <td>
-        <label>Title for your new blog:</label>
-        </td>
-        <td>
+</div>
+
+<form name="newpost" method="POST">
+    <label>
+        Title for your new blog:
+        <input name="title" style="width: 210px;" type="text"/>
         
-        <input type="text" name='form-title' value='{{title_namefield}}'/>
-        
-        </td>
-        <td> <span class="error">{{title_error}}</span></td>
-        </tr>
-        <tr></tr>
-        <tr>
-        <td>
-        <label> Your new blog:</label>
-        </td>
-        <td>
-        
-        <textarea name='form-blog' rows="4" cols="20" >{{blog_postfield}}</textarea>
-        
-        </td>
-        <td> <span class="error">{{blog_error}}</span></td>
-        </tr>
-        <tr>
-        <td>
-        <input type="submit" value='Add Blog' />
-        </td>
-        </tr>
-        </table>
-    </form>
-{% endblock %} 
+    </label><br><br>
+ 
+    <label>
+        Your new blog:
+        <textarea name="body" type="textarea"></textarea>
+       
+    </label>
+
+<br><br><br>        
+<input type="submit" name="Add-Entry"/>
+
+</form>     
+
+{% if error %}
+  <p class='error'>{{ error }}</p>
+{% endif %}
+   
+{% endblock %}
