@@ -5,13 +5,19 @@
     div.a { text-align: center;}
 </style> 
 <div class="a">
-    <h1>Build a Blog</h1> 
+    <h1>Blogz</h1> 
 </div>
 <ul>
     {% for blog in blogs %}   
     <h2><a href="/post?id={{blog.id}}">{{ blog.title }}</a></h2>
     <p>{{ blog.body }}</p>
-    {% endfor %}    
+        {% for user in users %}
+            {% if blog.owner_id == user.id %}
+            written by
+            <a href="/blog?user={{user.username}}">{{user.username}}</a> 
+            {% endif %}  
+        {% endfor %}
+    {% endfor %}   
 </ul>                     
 
 
