@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 app.secret_key = "ads;lkfja"
 
-class Blogpost(db.Model):
+class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120))
     body = db.Column(db.Text)
@@ -24,7 +24,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
-    blogs = db.relationship('Blogpost', backref='owner')
+    blogs = db.relationship('Blog', backref='owner')
 
     def __init__(self, username, password):
         self.username = username
@@ -43,7 +43,7 @@ def index():
     user_id = request.args.get('id')
     if user_id:
         writer = User.query.filter_by(id=user_id).first()
-        posts = Blogpost.query.filter_by(owner=writer).all()
+        posts = Blog.query.filter_by(owner=writer).all()
         return render_template('singleUser.html', posts = posts)
 
     users = User.query.all()
@@ -55,11 +55,11 @@ def blogs():
     blog_id = request.args.get('id')
     if blog_id:
         blog_id_int = int(blog_id)
-        posts = Blogpost.query.filter_by(id=blog_id_int).first()
+        posts = Blog.query.filter_by(id=blog_id_int).first()
         
         return render_template('blog-ID.html', title="Blog Post", posts=posts)
 
-    blogs=Blogpost.query.all()
+    blogs=Blog.query.all()
     return render_template('blogs.html', blogs=blogs)
 
 
@@ -73,7 +73,7 @@ def newpost():
         #     flash('Addblog - User not found.')
         #     return redirect('/')
 
-        new_blog = Blogpost(title, body, user)
+        new_blog = Blog(title, body, user)
         db.session.add(new_blog)
         db.session.commit() 
         
