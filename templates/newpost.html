@@ -1,21 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Add a Blog</h1>
 
-<form method='POST' action='/newpost'>
-    <label for="title">New Blog Title</label>
-    <input type="text" name="title" value='{{title}}' id='title' required />
-<br>
-<br>
-<label for="body">Your New Blog</label>
-<br>
-<br>
-    <textarea rows='20' cols='50' name='body' value='{{body}}' id='body' required></textarea>
-<br>   
-    <input type="submit" value='Add Entry'/>
-<br>
-</form>    
+<style>
+    div.a { text-align: center;}
+    .error { color: red;}
+</style> 
 
+<div class="a"> 
+    <h1>Add a Blog</h1>
+</div>
 
+<form name="newpost" method="POST">
+    <label>
+        Title for your blog:
+        <input name="title" style="width: 210px;" type="text"/>
+        
+    </label><br><br>
+ 
+    <label>
+        Your new blog:
+        <textarea name="body" type="textarea"></textarea>
+       
+    </label>
+
+<br><br><br>        
+<input type="submit" name="Add-Entry"/>
+
+</form>     
+
+{% if error %}
+  <p class='error'>{{ error }}</p>
+{% endif %}
+   
 {% endblock %}

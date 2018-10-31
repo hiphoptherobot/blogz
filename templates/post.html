@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    div.a { text-align: center;}
+</style> 
+<ul>
+    {% for blog in submitted_blogs %}
+
+    <h1>{{ blog.title }}</h1>
+    <p>{{ blog.body }}</p>
+        {% for user in users %}
+            {% if user.id == blog.owner_id %}
+            written by
+            <a href="/blog?user={{user.username}}">{{user.username}}</a> 
+            {% endif %}  
+        {% endfor %} 
+    {% endfor %}
+</ul>
+
+{% endblock %}

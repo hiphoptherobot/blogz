@@ -1,35 +1,51 @@
 <!doctype html>
-
 <html>
     <head>
-        <title>BLOG!</title>
+        <style>
+            span.navigationSpace {
+            padding-left: 90px;
+        }
+        </style>
+
+        <nav>
+            <a href='/'>Home</a>
+            <span class="navigationSpace"></span>
+            <a href="/blog">Main Blog Page</a>
+            <span class="navigationSpace"></span>
+            <a href="/newpost">Add a Blog Entry</a>
+            <span class="navigationSpace"></span>
+            <span class="navigationSpace"></span>
+            <span class="navigationSpace"></span>
+            <span class="navigationSpace"></span>
+            <span class="navigationSpace"></span>
+            <span class="navigationSpace"></span>
+            <a href='/login'>Log In</a>
+            <span class="navigationSpace"></span>
+            <a href='/logout'>Log Out</a>
+        </nav>
+        
+        <title>{{title}}</title>
+
+        <style>
+            .error {
+                color: red;
+            }
+        </style>
     </head>
 <body>
-    <!username: {{user}}>
-    {% with messages = get_flashed_messages() %}
+         
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
         <ul>
-            {% for message in messages %}
-            <li>{{message}}</li>
-            {% endfor %}
+        {% for category,message in messages %}
+            <li class="{{category}}">{{message}}</li>
+        {% endfor %}
         </ul>
     {% endwith %}
-    <div>
-        <a href='/'>Main Blog Page</a>
-        <p></p>
-        <a href='/newpost'>Add a Blog Entry</a>
-        <p></p>
-        <a href='login'>Sign In</a> | <a href='Sign_Out'>Sign Out</a>
-        <p></p>
-        <p></p>
-        <a href='/blogs'>All Blog Posts</a>
-        
 
-    </div>
-
-
-
-    {% block content %} {% endblock %}
+{% block content %}
+   
+{% endblock %}
 
 </body>
-
 </html>
